@@ -5,7 +5,7 @@
   "keywords": [],
   "author": "serapath (Alexander Praetorius) <dev@serapath.de>",
   "repository": "git://github.com/serapath/clilib.git",
-  "main": "index",
+  "main": "SOURCE",
   "homepage": "https://github.com/serapath/clilib",
   "bugs": {
     "url": "https://github.com/serapath/clilib/issues",
