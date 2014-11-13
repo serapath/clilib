@@ -42,6 +42,5 @@
     "jshint-pre-commit",
     "unit-test"
   ],
-  "private": true,
   "npmgenerate-cjs": "0.1.1"
 }
