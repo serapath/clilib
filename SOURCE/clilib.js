@@ -122,7 +122,7 @@
           //   return;
           // }
         }
-        : SETTINGS // @JOB: Extend non-given OPTIONS with DEFAULTS, allow override defualts with "NULL"
+        : (SETTINGS.SUGGESTIONS=SUGGESTIONS,SETTINGS) // @JOB: Extend non-given OPTIONS with DEFAULTS, allow override defualts with "NULL"
       ;
       var MODULE =
         ENTITIES.length ? ENTITIES[ENTITIES.length-1] : // @JOB: if singleton vs factory
@@ -150,17 +150,30 @@
 
 :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::*/
           /*-------------------------------------------------------------------
-            TEMPLATE - BUILDING
-          -------------------------------------------------------------------*/
-            // none
-          /*-------------------------------------------------------------------
-            TEMPLATE - CUSTOMIZATION (Markup, Properties, Styling)
+            TEMPLATE - BUILDING & CUSTOMIZATION (Markup, Properties, Styling)
           -------------------------------------------------------------------*/
             // none
           /*-------------------------------------------------------------------
             DEFINE
           -------------------------------------------------------------------*/
-            // none
+            DESCRIPTION = function (string) { STATE.description = string; return api; },
+            EXAMPLE     = function (string) { STATE.example = string; return api; },
+            USAGE       = function (string) { STATE.usage = string; return api; }, // @JOB: maybe autogenerate
+            DEFAULTS    = function (options) { STATE.options = options; return api; },
+            CHECK       = function (validators) { STATE.validators = validators; return api; },
+            OPTION      = function (parameter) {
+              STATE.parameters[parameter] = true;
+              return api;
+            },
+            COMMAND     = function (name, callback) {
+              var x = STATE.commands[name] = {
+                alias   : function (string) { console.log(string); return x; },
+                option  : function (name, params) { console.log(name, params); console.log('set opts'); return x; },
+                check   : function (string) { console.log(string); return x; },
+                example : function (string) { console.log(string); return x; }
+              };
+              callback(x);
+            },
           /*-------------------------------------------------------------------
             USER INTERACTION EVENTS & HANDLER
           -------------------------------------------------------------------*/
@@ -195,7 +208,14 @@
               /*---------------------------------------------------------------
                 BUILD MODULE
               ---------------------------------------------------------------*/
-              init: function initializeObject (settings) {
+              DESCRIPTION : DESCRIPTION,
+              EXAMPLE     : EXAMPLE,
+              USAGE       : USAGE,
+              DEFAULTS    : DEFAULTS,
+              CHECK       : CHECK,
+              OPTION      : OPTION,
+              COMMAND     : COMMAND,
+              init      : function initializeObject (settings) {
                 delete api.init;
                 /*-------------------------------------------------------------
                   CUSTOMIZE - module interface, internals & initialization
@@ -204,6 +224,7 @@
                 // or set other api.attributes
                 // or return something
                 // or set some global stuff
+                console.log(settings);
               }
             }
           ;
@@ -214,7 +235,15 @@
           // [Optional] initialize this module immediately
           api.init({}); // provide optional settings argument
           return ENTITIES[api.id-1];
-        })({})
+        })({
+          description : '',
+          example     : '',
+          usage       : '',
+          options     : '',
+          validators  : {},
+          parameters  : {},
+          commands    : {}
+        })
       ;
       MODULE.META = META;
       return MODULE;

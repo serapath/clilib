@@ -1,6 +1,5 @@
 {
   "bitwise": false,
-  "camelcase": true,
   "curly": false,
   "eqeqeq": true,
   "forin": true,
@@ -20,7 +19,6 @@
   "node": true,
   "noempty": true,
   "maxdepth": 4,
-  "maxparams": 4,
   "globals": {
     "console": true,
     "Buffer": true,

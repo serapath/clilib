@@ -1,6 +1,6 @@
 {
   "name": "clilib",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "library for building command line interfaces",
   "keywords": ["clilib"],
   "author": "serapath (Alexander Praetorius) <dev@serapath.de>",
