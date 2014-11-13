@@ -1,11 +1,6 @@
 clilib
 ======
 
-library for building command line interfaces
-
-
-# clilib
-
 <!--
     [![build status][build-png]][build]
     [![Coverage Status][cover-png]][cover]
@@ -51,7 +46,6 @@ clilib := (arg: Any) => void
 ## Contributors
 
  - serapath (Alexander Praetorius)
-
 
 ## MIT Licenced
 
