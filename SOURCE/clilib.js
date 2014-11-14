@@ -153,6 +153,25 @@
             TEMPLATE - BUILDING & CUSTOMIZATION (Markup, Properties, Styling)
           -------------------------------------------------------------------*/
             // none
+// action    = {
+//   init      : function initialize (folder) {
+//     return console.log("@TODO: Initialize folder: " + folder);
+//   },
+//   snapshot  : function snapshot () {
+//     return console.log("@TODO: Creating snapshot...");
+//   },
+//   help      : function help () {
+//     return fs.createReadStream(__dirname + '/usage.txt')
+//       .pipe(process.stdout)
+//       .on('close', function () { exit(1) });
+//   }
+// }
+//   var result = isAction(command) ? action[command]() : action['help']();
+//   // HELPERS
+//   function isAction (command) {
+//     // (command === 'help' || argv.help) { // @TODO: check for help with "nested commands" too
+//     return typeof action[command] === 'function';
+//   }
           /*-------------------------------------------------------------------
             DEFINE
           -------------------------------------------------------------------*/
@@ -173,6 +192,7 @@
                 example : function (string) { console.log(string); return x; }
               };
               callback(x);
+              return api;
             },
           /*-------------------------------------------------------------------
             USER INTERACTION EVENTS & HANDLER
@@ -214,6 +234,7 @@
               DEFAULTS    : DEFAULTS,
               CHECK       : CHECK,
               OPTION      : OPTION,
+              PARAMETER   : OPTION,
               COMMAND     : COMMAND,
               init      : function initializeObject (settings) {
                 delete api.init;
